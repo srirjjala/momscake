@@ -1,0 +1,418 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delightful Cakes - Shop</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation Bar */
+        .navigation {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Blur effect */
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navigation ul li {
+            margin: 0 20px;
+        }
+
+        .navigation ul li a {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .navigation ul li a:hover {
+            color: #d35400; /* Orange on hover */
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 20px; /* Increased padding to account for fixed nav */
+            text-align: center;
+            background: linear-gradient(135deg, #e67e22, #e74c3c); /* Gradient background */
+            color: white;
+            height: 100vh;
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); /* Dark overlay */
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.6em;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            background-color: #d35400;
+            color: white;
+            border-radius: 30px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px); /* Button lift effect */
+        }
+
+        /* About Us Section */
+        .about-us {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #f39c12, #e74c3c); /* Gradient background */
+            color: white;
+        }
+
+        .about-us h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-us p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background for text */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Shop Section */
+        .shop-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('cake-shop-bg.jpg') no-repeat center center; /* Background image */
+            background-size: cover;
+            filter: blur(8px); /* Blurry background effect */
+            z-index: 1;
+            opacity: 0.3; /* Slightly visible background */
+        }
+
+        .shop-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #e74c3c;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Product Pricing Table */
+        table {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        th {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #f39c12;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Contact Us Section */
+        .contact-us {
+            padding: 80px 20px;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+
+        .contact-us h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .contact-us p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .contact-us button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            background-color: #d35400;
+            color: white;
+            font-size: 1.1em;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-us button:hover {
+            background-color: #e74c3c;
+            transform: translateY(-3px);
+        }
+
+        /* Contact Us Icons */
+        .whatsapp-button {
+            background-color: #25D366;
+        }
+
+        .instagram-button {
+            background-color: #E1306C;
+        }
+
+        .youtube-button {
+            background-color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navigation">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h2>Welcome to Delightful Cakes</h2>
+        <p>We bake delicious, beautifully crafted cakes for every occasion, made with love and the finest ingredients.</p>
+        <a href="#shop" class="cta-button">Order Now</a>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us" id="about">
+        <h2>About Us</h2>
+        <p>At Delightful Cakes, we are passionate about creating delectable cakes that make your celebrations special. Using only the best ingredients, our cakes are made fresh daily, ensuring the perfect balance of flavor and presentation. We specialize in custom cakes for birthdays, weddings, and events, crafting edible works of art that taste as good as they look.</p>
+    </section>
+
+    <!-- Shop Section with Pricing Table -->
+    <section class="shop-section" id="shop">
+        <h2>Our Cake Collection & Pricing</h2>
+        <table>
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Flavor</th>
+                        <th>Price (1 kg) (₹)</th>
+                        <th>Price (1/2 kg) (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Vanilla flavour</td>
+                        <td>599</td>
+                        <td>349</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Pineapple flavour</td>
+                        <td>649</td>
+                        <td>349</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Strawberry flavour</td>
+                        <td>649</td>
+                        <td>349</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Eggless flavour</td>
+                        <td>699</td>
+                        <td>349</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Butterscotch flavour</td>
+                        <td>699</td>
+                        <td>399</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Black forest flavour</td>
+                        <td>749</td>
+                        <td>429</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Chocolate flavour</td>
+                        <td>799</td>
+                        <td>449</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Red velvet flavour</td>
+                        <td>799</td>
+                        <td>449</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Blue berry flavour</td>
+                        <td>799</td>
+                        <td>449</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Black currant</td>
+                        <td>799</td>
+                        <td>449</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Milky badam flavour</td>
+                        <td>899</td>
+                        <td>479</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Choco truffle flavour</td>
+                        <td>999</td>
+                        <td>549</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Kesar pista</td>
+                        <td>1099</td>
+                        <td>569</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Gulab jamun</td>
+                        <td>1199</td>
+                        <td>649</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Rasmalai flavour</td>
+                        <td>1299</td>
+                        <td>679</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Plum cake</td>
+                        <td>699</td>
+                        <td>349</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Cup cakes small</td>
+                        <td>8 each</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Medium cup cakes</td>
+                        <td>12 each</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>Big size cup cakes</td>
+                        <td>17 each</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Tea time cake</td>
+                        <td>299</td>
+                        <td>149</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact-us" id="contact">
+        <h2>Contact Us</h2>
+        <a href="https://wa.me/918333985114" target="_blank">
+            <button class="whatsapp-button">WhatsApp Us</button>
+        </a>
+        <a href="https://www.instagram.com/bhavani_cake_bakes?igsh=MTdhYzNqMDduamoxNg==" target="_blank">
+            <button class="instagram-button">Follow us on Instagram</button>
+        </a>
+        <a href="https://youtube.com/@bhavani_cake_bakes?si=of-TH9zRYkZ9GC7D" target="_blank">
+            <button class="youtube-button">Subscribe on YouTube</button>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Delightful Cakes. All rights reserved.</p>
+    </footer>
+
+</body>
